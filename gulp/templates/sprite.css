@@ -10,7 +10,7 @@
 
   .icon--{{base}} {
     width:  {{width.outer}}px;
-    height: {{width.outer}}px;
+    height: {{height.outer}}px;
     background-position: {{position.relative.xy}};
   }
 {{/shapes}}

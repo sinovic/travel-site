@@ -4,7 +4,8 @@ var gulp         = require('gulp'),
     cssvars      = require('postcss-simple-vars'),
     nested       = require('postcss-nested'),
     cssImport    = require('postcss-import'),
-    mixins       = require('postcss-mixins')
+    mixins       = require('postcss-mixins'),
+    hexrgba      = require('postcss-hexrgba')
 ;
 
 gulp.task('style', function () {
@@ -12,7 +13,7 @@ gulp.task('style', function () {
 
     // We use return because gulp.src() is an async function
     return gulp.src('./app/assets/styles/style.css')
-        .pipe(postcss([cssImport, mixins, autoprefixer, cssvars, nested]))
+        .pipe(postcss([cssImport, mixins, autoprefixer, cssvars, hexrgba, nested]))
         // Error Handling
         .on('error', function (errorInfo) {
             console.log(errorInfo.toString());
