@@ -5,6 +5,7 @@
   width: 100%;
   transition: background-color .3s ease-out;
 
+
   &--is-expanded {
     background-color: rgba($mainBlue, .55);
   }
