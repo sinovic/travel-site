@@ -10,6 +10,11 @@
   &--blue {
     color: $mainBlue;
   }
+
+  &--less-margin {
+    margin: 0 0 1.3rem;
+  }
+
   strong {
     font-weight: 500;
   }
