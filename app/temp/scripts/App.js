@@ -11112,10 +11112,10 @@ var _Modal2 = _interopRequireDefault(_Modal);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mobileMenu = new _MobileMenu2.default();
-var stickyHeader = new _StickyHeader2.default();
 var modal = new _Modal2.default();
 new _RevealOnScroll2.default('.feature-item', '85%');
 new _RevealOnScroll2.default('.testimonial', '60%');
+var stickyHeader = new _StickyHeader2.default();
 
 /***/ }),
 /* 3 */
@@ -11239,6 +11239,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+/*
+    All Waypoints library does, is touching
+    an object name Waypoint to web browser's global window scope.
+ */
+
 
 var _jquery = __webpack_require__(0);
 
@@ -11260,6 +11265,7 @@ var StickyHeader = function () {
     function StickyHeader() {
         _classCallCheck(this, StickyHeader);
 
+        this.lazyImages = (0, _jquery2.default)('.lazyload');
         this.siteHeader = (0, _jquery2.default)('.site-header');
         this.headerTriggerElement = (0, _jquery2.default)('.large-hero__title');
         this.pageSections = (0, _jquery2.default)('.page-section');
@@ -11267,9 +11273,19 @@ var StickyHeader = function () {
         this.createHeaderWaypoint();
         this.createPageSectionWaypoints();
         this.addSmoothScrolling();
+        this.refreshWaypoints();
     }
 
     _createClass(StickyHeader, [{
+        key: 'refreshWaypoints',
+        value: function refreshWaypoints() {
+            this.lazyImages.load(function () {
+                /* This isn't only being apply to the Waypoints created in StickyHeader,
+                this is refreshing all Waypoints that's currently exist in web browser memory. */
+                Waypoint.refreshAll();
+            });
+        }
+    }, {
         key: 'addSmoothScrolling',
         value: function addSmoothScrolling() {
             this.headerLinks.smoothScroll();

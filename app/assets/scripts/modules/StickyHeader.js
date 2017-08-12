@@ -1,9 +1,14 @@
 import $            from 'jquery';
+/*
+    All Waypoints library does, is touching
+    an object name Waypoint to web browser's global window scope.
+ */
 import waypoints    from '../../../../node_modules/waypoints/lib/noframework.waypoints';
 import smoothScroll from 'jquery-smooth-scroll';
 
 class StickyHeader {
     constructor() {
+        this.lazyImages           = $('.lazyload');
         this.siteHeader           = $('.site-header');
         this.headerTriggerElement = $('.large-hero__title');
         this.pageSections         = $('.page-section');
@@ -11,6 +16,15 @@ class StickyHeader {
         this.createHeaderWaypoint();
         this.createPageSectionWaypoints();
         this.addSmoothScrolling();
+        this.refreshWaypoints();
+    }
+
+    refreshWaypoints() {
+        this.lazyImages.load(function () {
+            /* This isn't only being apply to the Waypoints created in StickyHeader,
+            this is refreshing all Waypoints that's currently exist in web browser memory. */
+            Waypoint.refreshAll();
+        });
     }
 
     addSmoothScrolling() {
